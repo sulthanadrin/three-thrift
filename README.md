@@ -28,3 +28,26 @@ link ke aplikasi saya : http://sultan-adrin-threethrift.pbp.cs.ui.ac.id/
 
 
 ![image](https://drive.google.com/uc?export=view&id=1y_lcjwvPQrYxBirCz6I5LQjLT8BBP55A)
+
+*fungsi git dalam pengembangan perangkat lunak*
+
+  1. Melakukan version control, dengan riwayat commit yang telah dilakukan kita dapat melihat tiap perubahan yang terjadi, kapan perubahan terjadi, apa yang berubah, dan siapa yang melakukan perubahan.
+
+  2. Penyimpanan yang terdistribusi, dengan tiap pengembang memiliki salinan penuh terhadap repository yang ada di git sangat mempermudah pekerjaan pengembang dengan bekerja secara offline dan dimana saja.
+
+  3. Kerja kolaboratif, dengan git pengembang dapat bekerja sama dengan pengembang lain untuk membangun program bersama-sama yang hasilnya dapat disatukan di repository yang sama.
+
+*mengapa framework Django dijadikan permulaan pembelajaran pengembangan perangkat lunak?*
+
+  Django adalah framework yang cocok untuk membangun situs web Python, terutama jika membutuhkan kecepatan dan fleksibilitas. Beberapa alasan mengapa memilih Django antara lain
+
+Fitur Lengkap (Batteries-included)
+  -> Django sudah menyediakan semua komponen yang dibutuhkan seperti ORM, autentikasi, templating, dan routing, sehingga memudahkan pengembangan web cepat dan efisien.
+
+Keamanan Terjamin
+  -> Django secara otomatis melindungi dari ancaman keamanan umum seperti SQL injection dan cross-site scripting, serta sering diperbarui untuk menjaga keamanan.
+
+Skalabilitas
+  -> Django mendukung pengembangan web yang dapat berkembang sesuai kebutuhan, dengan lingkungan pengembangan yang fleksibel dan mudah disesuaikan.
+
+  Selain itu, Django memiliki komunitas besar dan dokumentasi lengkap untuk memudahkan pengembang.
