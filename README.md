@@ -26,4 +26,4 @@ link ke aplikasi saya : http://sultan-adrin-threethrift.pbp.cs.ui.ac.id/
 
 *bagan request client ke web aplikasi berbasis Django*
 
-![](Blank diagram.png)
+![gambar bagan](Blank_diagram.png)
