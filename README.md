@@ -26,4 +26,5 @@ link ke aplikasi saya : http://sultan-adrin-threethrift.pbp.cs.ui.ac.id/
 
 *bagan request client ke web aplikasi berbasis Django*
 
-![gambar bagan](https://drive.google.com/file/d/1y_lcjwvPQrYxBirCz6I5LQjLT8BBP55A/view?usp=sharing)
+
+![image](https://drive.google.com/uc?export=view&id=1y_lcjwvPQrYxBirCz6I5LQjLT8BBP55A)
