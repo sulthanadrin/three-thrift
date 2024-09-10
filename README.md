@@ -24,3 +24,6 @@ link ke aplikasi saya : http://sultan-adrin-threethrift.pbp.cs.ui.ac.id/
     - Melakukan deployment ke PWS terhadap aplikasi yang sudah dibuat
       -> Saya membuat proyek baru melalui akun saya pada https://pbp.cs.ui.ac.id/ yang bernama threethrift. Lalu pada file settings.py yang berada di direktori three_thrift saya menambahkan url deployment pws ke ALLOWED_HOSTS. Setelah itu pada terminal saya menambahkan url pws lalu melakukan git push pws master.
 
+*bagan request client ke web aplikasi berbasis Django*
+
+![](Blank diagram.png)
