@@ -51,3 +51,10 @@ Skalabilitas
   -> Django mendukung pengembangan web yang dapat berkembang sesuai kebutuhan, dengan lingkungan pengembangan yang fleksibel dan mudah disesuaikan.
 
   Selain itu, Django memiliki komunitas besar dan dokumentasi lengkap untuk memudahkan pengembang.
+
+
+*Mengapa model pada Django disebut ORM*
+  -> Model  Django disebut ORM (Object-Relational Mapping) karena memetakan objek Python ke tabel database.
+ Dengan menggunakan ORM, developer dapat melakukan manipulasi data database sebagai objek Python tanpa harus menggunakan SQL sebagai bahasa yang digunakan untuk mengakses database.
+
+
