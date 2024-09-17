@@ -90,6 +90,17 @@ Skalabilitas
 
   ![image](https://drive.google.com/uc?export=view&id=14KJB0o0a9tvR-_TGTvbcg1Fk6d-DIphF)
 
+  *Foto Postman XML*
+
+  ![image](https://drive.google.com/uc?export=view&id=1EkyjboOkSwAl2owGCsFuz9YeRaVooy4D)
+
+  *Foto Postman JSON with ID*
+
+  ![image](https://drive.google.com/uc?export=view&id=1b2Bh-eq2wJj93mcHBdxzH2qQHdbywF7b)
+
+  *Foto Postman XML with ID*
+
+  ![image](https://drive.google.com/uc?export=view&id=1aKVcYQYZxAXwqdOBaOw45LT4U0osAPbz)
 
 
 
