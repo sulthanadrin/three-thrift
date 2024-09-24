@@ -1,6 +1,6 @@
 link ke aplikasi saya : http://sultan-adrin-threethrift.pbp.cs.ui.ac.id/
 
---TUGAS 1--
+--TUGAS 2--
 *bagaimana cara saya mengimplementasikan checklist*
 
     - Membuat sebuah proyek Django baru
@@ -59,7 +59,7 @@ Skalabilitas
 
 
 
---TUGAS 2--
+--TUGAS 3--
 
   *Mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?*
   -> Data delivery memberikan kemudahan dalam aksesibilitas data. Data delivery juga data delivery memberikan real-time processing yang dapat disajikan secara real time. Selain itu proses data delivery yang memiliki struktur yang baik dapat melindungi data.
@@ -105,5 +105,45 @@ Skalabilitas
 
 
 
+
+  --TUGAS 4--
+
+  *Perbedaan antara HttpResponseRedirect dan redirect
+  -> HttpResponseRedirect hanya bisa menerima url sebagai argumen pertamanya yang digunakan untuk mengarahkan user ke url tertentu sedangkan redirect bisa menerima model, view, ataupun url yang berarti redirect bisa mengarahkan pengguna tanpa perlu mengonversi sebagai url
+
+  *Cara penghubungan model Product dengan User*
+  -> Pertama-tama kita harus mengimpor model User terlebih dahulu di models.py. Lalu berikutnya pada class Product kita mendefinisikan user = models.ForeignKey(User, on_delete=models.CASCADE) untuk mengindikasikan bahwa produk dimiliki oleh pengguna. Setelah itu kita mendefinisikan  id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) untuk memberikan identifikasi yang unik untuk setiap produknya agar bisa dikenali kepemilikan product tersebut. Lalu setelah itu lakukan migration setelah melakukan perubahan tersebut pada models.py
+
+  Penghubungan model Product dengan model User di Django dilakukan dengan mendefinisikan field user dalam class Product sebagai models.ForeignKey(User, on_delete=models.CASCADE). Ini menciptakan relasi satu-ke-banyak, di mana satu user dapat memiliki banyak produk. Dengan menggunakan on_delete=models.CASCADE, jika user dihapus, semua produk yang dimilikinya juga akan dihapus. Selain itu, setiap produk diberikan ID unik menggunakan models.UUIDField yang memungkinkan pengidentifikasian produk secara individual di dalam database.
+
+  Setelah mendefinisikan model, langkah selanjutnya adalah melakukan migrasi untuk menerapkan perubahan ke database. Proses ini dilakukan dengan menjalankan perintah makemigrations dan migrate. Dengan cara ini, ketika user membuat produk baru, field user akan diisi dengan ID user yang aktif. Hal ini memudahkan dalam mengelola dan menampilkan informasi produk beserta pemiliknya, sehingga memberikan struktur data yang terorganisir dalam aplikasi Django.
+
+  *Perbedaan authentication dan authorization apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.*
+  -> Authentication adalah suatu proses yang berfungsi untuk memverifikasi identitas pengguna sedangkan authorization adalah proses untuk menentukan hak akses apa saja yang dimiliki oleh pengguna setelah melakukan authentication. Saat proses login, pengguna memasukkan kredensial yang umumnya berupa username dan juga password. Setelah itu sistem melakukan authentication untuk memverifikasi kredensial yang telah diinput tersebut. Jika berhasil, pengguna dapat mengakses aplikasi tetapi authorization akan dilakukan terlebih dahulu untuk menentukan hak akses pengguna. Django menyediakan sistem bawaan untuk authentication dan juga authorization yaitu authenticate, login dan juga logout. Lalu berikutnya kita bisa menambahkan decorator seperti @login_required dan juga @permission_required pada function function pada views.py (umumnya pada show_main)
+
+  *Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?*
+  -> Saat user login, Django membuat session baru yang menyimpan informasi user seperti ID dari user dan session tersebut akan disimpan di server dan diidentikasi oleh sebuah session ID. Setelah itu Django mengirimkan session cookie ke browser dari user. Setiap kali user mengunjungi laman web, cookie tersebut akan dikirimkan kembali ke server yang memungkinkan Django untuk mengidentifikasi kembali User. Beberapa kegunaan lain dari cookies diantaranya untuk menyimpan preferensi user pada laman web seperti bahasa dan juga tema. Selain itu cookies juga bisa melacak aktivitas user di situs web dan juga menyimpan token autentikasi agar user tetap login meskipun browser telah ditutup. Lalu apakah semua cookies aman digunakan? jawabannya belum tentu. Cookies dapat rentan terhadap serangan seperti Cross-Site Scripting (XSS) dan Cross-Site Request Forgery (CSRF) jika tidak dikelola dengan baik. Cookie juga dapat melakukan tracking yang mengganggu privasi pengguna oleh karena itu terkadang saat mengunjungi laman web kita diberikan pilihan apakah ingin accept cookies, reject, ataupun manage secara manual.
+
+
+*Implementasi Checklist*
+
+- Implementasi fungsi registrasi,login dan logout
+-> Pertama-tama saya mengaktifkan virtual environment terlebih dahulu, lalu setelah itu pada views.py saya mengimport UserCreationForm dan juga messages yang telah disediakan oleh Django untuk membuat formulir register. Lalu setelah itu saya menambahkan function register dengan parameter request pada views.py dengan UserCreationForm sebagai formnya lalu menambahkan conditional untuk validasi input dari user terhadap form register pada function tersebut dan juga membuat file baru yang bernama register.html pada direktori main/templates untuk template dari form register. Lalu terakhir saya mengimport function register di urls.py dan menambahkan path urlnya ke urlpatterns. Lalu untuk membuat function Login saya mengimport authenticate, AuthenticationForm dan login pada views.py yang telah disediakan oleh Django. Setelah itu saya menambahkan function login_user dengan parameter request. Lalu membuat template baru bernama login.html pada direktori main/templates dan melakukan import function pada urls.py dan menambahkan path urlnya ke dalam urlpatterns. Lalu yang terakhir saya kembali mengimport function logout bawaan Django pada views.py dan menambahkan function logout_user dengan parameter request yang berisi memanggil function logout untuk menghapus session dari pengguna dan mengarahkannya kembali ke laman login. Lalu pada template main.html saya menambahkan button untuk melakukan logout dan kembali melakukan import pada urls.py dan menambahkan path urlnya ke urlpatterns.
+
+- Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal.
+-> Saya melakukan register akun sebanyak dua kali dan melakukan login satu persatu ke dalam tiap akun. Setelah itu saya melakukan input new product sebanyak tiga kali untuk setiap user dengan atribut product yang berbeda-beda.
+
+-Menghubungkan model Product dengan User
+-> Pertama-tama saya mengimpor model User terlebih dahulu di models.py. Lalu berikutnya pada class Product saya mendefinisikan user = models.ForeignKey(User, on_delete=models.CASCADE) untuk mengindikasikan bahwa produk dimiliki oleh pengguna. Setelah itu kita mendefinisikan  id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) untuk memberikan identifikasi yang unik untuk setiap produknya agar bisa dikenali kepemilikan product tersebut. Lalu setelah itu lakukan migration setelah melakukan perubahan tersebut pada models.py
+
+
+- Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi.
+-> Pada views.py saya mengimport beberapa function yaitu HttpResponseRedirect untuk directing user ke halaman-halaman pada web, lalu reverse untuk membalikkan proses pencarian URL berdasarkan nama view yang telah didefinisikan dalam urls.py dan juga datetime untuk waktu dan tanggal. Lalu pada function login_user pada views.py saya menambahkan fungsionalitas cookie bernama last_login untuk melihat kapan terakhir kali pengguna melakukan login.
+Lalu pada function show_main saya menambahkan 'last_login': request.COOKIES['last_login'] ke dalam context untuk menambahkan informasi cookie last_login pada response yang akan ditampilkan pada halaman web. Lalu pada function logout_user saya menambahkan 
+response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+
+kode diatas berfungsi untuk menghapus cookie last_login saat user melakukan logout. Lalu pada template main.html saya menambahkan header baru pada bagian bawah untuk menampilkan data last login.
 
 
