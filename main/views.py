@@ -50,8 +50,10 @@ def login_user(request):
             login(request, user)
             response = HttpResponseRedirect(reverse("main:show_main"))
             response.set_cookie('last_login', str(datetime.datetime.now()))
+            messages.success(request, "Login berhasil!")
             return response
 
+      messages.error(request, "Username atau password salah.")
    else:
       form = AuthenticationForm(request)
    context = {'form': form}

@@ -1,6 +1,8 @@
 link ke aplikasi saya : http://sultan-adrin-threethrift.pbp.cs.ui.ac.id/
 
---TUGAS 2--
+<details>
+<summary>--TUGAS 2--</summary>
+
 *bagaimana cara saya mengimplementasikan checklist*
 
     - Membuat sebuah proyek Django baru
@@ -56,10 +58,10 @@ Skalabilitas
 *Mengapa model pada Django disebut ORM*
   -> Model  Django disebut ORM (Object-Relational Mapping) karena memetakan objek Python ke tabel database.
  Dengan menggunakan ORM, developer dapat melakukan manipulasi data database sebagai objek Python tanpa harus menggunakan SQL sebagai bahasa yang digunakan untuk mengakses database.
+</details>
 
-
-
---TUGAS 3--
+<details>
+<summary>--TUGAS 3--</summary>
 
   *Mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?*
   -> Data delivery memberikan kemudahan dalam aksesibilitas data. Data delivery juga data delivery memberikan real-time processing yang dapat disajikan secara real time. Selain itu proses data delivery yang memiliki struktur yang baik dapat melindungi data.
@@ -101,12 +103,13 @@ Skalabilitas
   *Foto Postman XML with ID*
 
   ![image](https://drive.google.com/uc?export=view&id=1aKVcYQYZxAXwqdOBaOw45LT4U0osAPbz)
+</details>
 
 
 
-
-
-  --TUGAS 4--
+<details>
+<summary>--TUGAS 4--</summary>
+  
 
   *Perbedaan antara HttpResponseRedirect dan redirect
   -> HttpResponseRedirect hanya bisa menerima url sebagai argumen pertamanya yang digunakan untuk mengarahkan user ke url tertentu sedangkan redirect bisa menerima model, view, ataupun url yang berarti redirect bisa mengarahkan pengguna tanpa perlu mengonversi sebagai url
@@ -145,5 +148,104 @@ response = HttpResponseRedirect(reverse('main:login'))
     return response
 
 kode diatas berfungsi untuk menghapus cookie last_login saat user melakukan logout. Lalu pada template main.html saya menambahkan header baru pada bagian bawah untuk menampilkan data last login.
+</details>
+
+<details>
+<summary>--TUGAS 5--</summary>
+
+* Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut*
+-> Berdasarkan prioritas:
+1. Inline Styles
+  -> Gaya yang diterapkan secara langsung pada elemen HTML menggunakan atribut style. Contoh: `<div style="color: red;">`
+
+2. ID Selectors
+  -> Selektor ini menggunakan tanda pagar '#' untuk menargetkan elemen berdasarkan ID-nya. Contoh: `#myID { color: blue;}`
+
+3. Class Selectors
+  -> Selektor ini menggunakan titik '.' untuk menargetkan elemen berdasarkan class-nya. Contoh: `.myclass { color: green;}`
+
+4. Element Selectors
+  -> Selektor ini menargetkan elemen HTML tertentu, seperti div, p atau h1. Contoh: `p { color: black;}`
+
+*Mengapa responsive design menjadi konsep yang penting dalam pengembangan aplikasi web? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design!*
+-> Tujuan utama dari responsive design adalah untuk menghindari resizing, scrolling, zooming ataupun panning yang tidak diperlukan pada situs yang belum dioptimalkan untuk cross-platform.
+
+Responsive design memungkinkan konten web mengalir dengan bebas di semua resolusi dan ukuran layar, serta tampil menarik di semua perangkat. Selain itu responsive design menghilangkan keharusan untuk maintaining versi yang berbeda untuk tiap situs web untuk tiap platformnya.
+
+Contoh aplikasi yang sudah menerapkan responsive design:
+1. VS Code
+2. Spotify
+3. Instagram
+
+*Jelaskan perbedaan antara margin, border, dan padding, serta cara untuk mengimplementasikan ketiga hal tersebut!*
+-> 
+Margin: batasan untuk mengatur area di luar elemen. Misal kita memiliki dua buah pasangan border dan padding. Margin mengatur jarak antara kedua pasangan tersebut agar tidak terlalu dekat atau tidak terlalu jauh.
+
+Border: batasan yang mengelilingi area konten dan padding yang berada di antara padding dan margin yang bisa diatur ketebalan gaya dan juga warnanya
+
+Padding: ruang yang berada di sekitar konten dan bersifat transparan dan juga berupa ruang antara konten dan border.
+
+*Jelaskan konsep flex box dan grid layout beserta kegunaannya!*
+-> Flex box adalah wadah yang berisi elemen-elemen berupa flex items yang dapat diatur secara fleksibel dan efisien. Konsep utama dari Flex box adalah Flex Container sebagai wadahnya yang di dalamnya terdapat Flex Items yaitu elemen-elemen yang bisa diatur dalam baris atau kolom (1 dimensi).
+Kegunaan: - Memberikan fleksibilitas dan responsivitas dalam mengatur elemen pada Flex Container.
+          - Menyediakan kontrol yang unggul terhadap ruang antar elemennya.
+          - Dapat mengatur elemen secara otomatis tanpa perlu mengatur posisi secara manual.
+
+Grid Layout adalah suatu modul yang membagi halaman dari web menjadi beberapa area utama untuk elemen-elemen ditempatkan di area-area tersebut dalam baris dan kolom (2 dimensi)
+Kegunaan: - Memberikan kedisiplinan dalam penyusunan elemen
+          - Memberikan web yang responsif karena penyesuaian untuk berbahai ukuran layar
+          - Konten pada web dapat dibagi menjadi beberapa bagian.
+
+*Implementasi Checklist*
+
+- Implementasi fungsi untuk menghapus dan mengedit product
+  -> 
+    *Fungsi hapus*
+    pada views.py, saya membuat function baru bernama delete_product yang menerima parameter request dan id
+    yang akan mengambil product berdasarkan id dan menghapusnya. Lalu setelah itu pada urls.py saya mengimport fungsi tersebut dan menambahkannya ke urlpatterns
+
+    *Fungsi edit*
+    pada views.py, saya membuat function baru bernama edit_product yang menerima parameter request dan id
+    yang akan mengambil product berdasarkan id dan mengeditnya menggunakan form product entry. Setelah itu isi dari form di validasi dan perubahan akan di save jika memenuhi.Lalu setelah itu pada urls.py saya mengimport fungsi tersebut dan menambahkannya ke urlpatterns
+
+
+- Kustomisasi desain pada template HTML yang telah dibuat pada tugas-tugas sebelumnya menggunakan CSS atau CSS framework (seperti Bootstrap, Tailwind, Bulma)
+
+  saya menggunakan tailwind untuk kustomisasi website
+
+  *Kustomisasi halaman login,register, dan tambah product*
+
+    |Halaman Login|
+    -> pada berkas login.html di templates pada directory main, Halaman ini dimulai dengan mewarisi dari base.html dan mengatur judul halaman menjadi "Login". Struktur utama menggunakan div yang diatur dengan flexbox untuk memusatkan form secara vertikal dan horizontal, dengan latar belakang biru tua (bg-sky-900). Form ini menggunakan metode POST untuk mengirim data, dan mencakup dua input field untuk username dan password, masing-masing dengan label yang disembunyikan untuk aksesibilitas. Tombol "Sign in" dirancang untuk mengirimkan form, dengan efek hover yang jelas.
+
+    Pesan umpan balik ditampilkan di bawah form menggunakan logika conditional, yang memeriksa apakah ada pesan yang harus ditampilkan. Pesan sukses dan kesalahan memiliki styling yang berbeda untuk memudahkan pengguna mengenali status login mereka. Selain itu, terdapat tautan untuk pendaftaran bagi pengguna baru, memudahkan mereka untuk membuat akun.
+
+    |Halaman Register|
+    -> Di dalamnya, terdapat div yang mengatur tampilan halaman dengan kelas min-h-screen flex items-center justify-center bg-gray-100, yang memastikan bahwa konten halaman terpusat baik secara horizontal maupun vertikal dengan latar belakang abu-abu muda. Judul halaman "Create your account" ditampilkan dengan ukuran font besar dan tebal menggunakan kelas text-3xl font-extrabold text-black, memberikan visibilitas yang baik kepada pengguna. Formulir pendaftaran diatur dengan margin dan padding yang responsif, serta menggunakan kelas space-y-6 untuk memberikan jarak antara elemen-elemen di dalam formulir.
+
+    Formulir tersebut mencakup loop untuk merender setiap field dari form yang telah didefinisikan, di mana setiap field dilengkapi dengan label dan validasi kesalahan. Kelas Tailwind CSS seperti rounded-md dan shadow-sm diterapkan untuk memberikan tampilan yang bersih dan modern. Jika ada kesalahan pada input, ikon kesalahan ditampilkan dengan menggunakan SVG dan pesan kesalahan ditampilkan di bawah field terkait dengan warna merah (text-red-600). Tombol "Register" dirancang dengan styling yang responsif dan interaktif, dengan efek hover yang meningkatkan warna latar belakang. Selain itu, ada tautan untuk navigasi ke halaman login, yang menggunakan kelas text-indigo-400 dan efek hover untuk memberikan umpan balik visual saat pengguna mengarahkan kursor ke tautan tersebut.
+
+    |Halaman Tambah Product|
+    -> Struktur utama halaman diatur dengan div yang memiliki kelas flex flex-col min-h-screen bg-gray-100, yang memastikan tampilan responsif dengan tinggi minimum yang sesuai layar dan latar belakang abu-abu muda. Di dalam kontainer, judul "Add New Product" ditampilkan di tengah dengan kelas text-3xl font-bold text-center mb-8 text-black, memberikan penekanan visual yang jelas. Formulir penambahan produk menggunakan kelas bg-white shadow-md rounded-lg p-6, yang memberikan latar belakang putih bersih dengan bayangan halus dan sudut yang dibulatkan, menciptakan tampilan yang modern dan rapi.
+
+    Setiap field dalam formulir dirender menggunakan loop, di mana label ditampilkan dengan kelas mb-2 font-semibold text-gray-700 untuk memberikan kontras yang baik. Ketika ada teks bantuan atau kesalahan, informasi tersebut ditampilkan di bawah field dengan styling yang sesuai: teks bantuan menggunakan kelas mt-1 text-sm text-gray-500 dan pesan kesalahan menggunakan kelas mt-1 text-sm text-red-600. Tombol "Add Product" di bagian bawah form memiliki desain responsif, dengan kelas bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out w-full,
+
+
+  *Kustomisasi halaman daftar product menjadi lebih menarik dan responsive.*
+  -> Struktur halaman dimulai dengan mewarisi dari base.html dan memuat navbar untuk navigasi. Konten utama diatur dalam div dengan kelas overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-white flex flex-col, yang memberikan tampilan bersih dengan padding yang sesuai dan memastikan bahwa halaman memenuhi tinggi layar minimum. Informasi pengguna seperti NPM, Nama, dan Kelas ditampilkan dalam grid responsif menggunakan kelas grid grid-cols-1 z-30 md:grid-cols-3 gap-8, sehingga informasi ini teratur dengan baik. Juga terdapat area untuk menampilkan waktu login terakhir dengan styling yang konsisten, menggunakan latar belakang indigo dan teks putih untuk memastikan keterbacaan.
+
+  Kondisi ketika tidak ada produk yang terdaftar ditangani dengan baik menggunakan struktur kondisional {% if not product_entry %}. Jika tidak ada produk, halaman akan menampilkan pesan dengan gambar sedih, menggunakan styling untuk memusatkan konten dan memberikan penjelasan bahwa belum ada produk yang ditambahkan. Pesan ini menggunakan kelas text-center text-gray-600 untuk memastikan keterbacaan. Sebaliknya, jika ada produk yang terdaftar, mereka akan ditampilkan dalam kolom dengan kelas columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full, yang memungkinkan produk ditampilkan dalam format kolom responsif. Setiap produk dirender menggunakan template card_product.html, memberikan konsistensi desain saat menampilkan informasi produk.
+
+*Button untuk mengedit dan dan menghapus product*
+-> Struktur utama produk dibungkus dalam div dengan kelas relative dan bg-indigo-100, yang memberikan latar belakang berwarna biru muda, dilengkapi dengan bayangan (shadow-md) dan sudut yang dibulatkan (rounded-lg). Judul produk dan informasi waktu ditampilkan dalam bagian atas kartu, dengan latar belakang gelap (bg-indigo-900) dan teks putih untuk memastikan keterbacaan yang baik. Selain itu, terdapat elemen visual seperti garis-garis kecil yang dibuat dengan div absolute, menambah dimensi dan menarik perhatian pada kartu produk.
+
+Terdapat dua tombol untuk mengedit dan menghapus produk, masing-masing dirancang dengan warna yang mencolok untuk memberikan umpan balik visual yang jelas kepada pengguna. Tombol edit menggunakan warna hijau (bg-emerald-400) dengan ikon pensil, sementara tombol hapus menggunakan warna merah (bg-red-500) dengan ikon tempat sampah. Kedua tombol ini memiliki efek hover yang meningkatkan warna latar belakang dan animate bounce ketika kursor diarahkan.
+
+*Navbar responsive*
+->Struktur navbar ditetapkan dengan kelas bg-indigo-950 shadow-lg fixed top-0 left-0 z-40 w-screen, yang memberikan latar belakang biru tua, efek bayangan, dan memastikan bahwa navbar selalu berada di bagian atas halaman. Di dalam navbar, terdapat div dengan kelas max-w-7xl mx-auto px-4 sm:px-6 lg:px-8, yang mengatur lebar maksimum navbar dan memastikan konten berada di tengah layar, dengan padding horizontal yang responsif. Penggunaan kelas flex pada div yang berisi item navbar memungkinkan elemen-elemennya untuk disusun secara horizontal dan memusatkan konten, menjadikan tampilan navbar lebih terorganisir.
+
+Untuk implementasi responsivitas, terdapat dua bagian penting: elemen yang ditampilkan berdasarkan ukuran layar dan tombol menu mobile. Pada tampilan desktop (md:flex), menu dengan tautan untuk login dan logout ditampilkan dengan jelas, sedangkan pada tampilan mobile (md:hidden), hanya ditampilkan tombol menu dengan ikon tiga stak. Kelas mobile-menu juga tersembunyi secara default dan ditampilkan hanya ketika tombol ditekan.
+
+</details>
 
 
