@@ -248,4 +248,97 @@ Untuk implementasi responsivitas, terdapat dua bagian penting: elemen yang ditam
 
 </details>
 
+<details>
+<summary>--TUGAS 6--</summary>
+*Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!*
+->
+
+  1.Interaktivitas pada Sisi Klien 
+  -> JavaScript memungkinkan halaman web menjadi interaktif dan responsif tanpa sering menghubungi server, sehingga meningkatkan pengalaman pengguna.
+
+  2.Kompatibilitas dengan Berbagai Browser
+  -> JavaScript kompatibel dengan semua browser utama, memastikan pengalaman pengguna yang konsisten di berbagai perangkat.
+
+  3.Ekosistem yang Beragam
+  -> Tersedia banyak framework dan pustaka seperti React dan Angular yang mempermudah pengembangan aplikasi web.
+
+  4.Performa 
+  -> Eksekusi JavaScript di sisi klien mengurangi beban server dan mempercepat kinerja aplikasi web.
+
+  5.Dukungan Komunitas 
+  -> Komunitas JavaScript sangat besar dan aktif, menyediakan banyak sumber daya, solusi, dan dukungan bagi pengembang.
+
+  6.Adaptabilitas untuk Front-End dan Back-End: 
+  -> JavaScript dapat digunakan untuk pengembangan baik di sisi depan (front-end) maupun belakang (back-end), misalnya dengan Node.js.
+
+  7.Desain Web Responsif 
+  -> JavaScript memungkinkan pembuatan desain web yang dapat menyesuaikan diri dengan berbagai ukuran layar, sehingga cocok untuk perangkat apa pun.
+
+*Jelaskan fungsi dari penggunaan await ketika kita menggunakan fetch()! Apa yang akan terjadi jika kita tidak menggunakan await?*
+->
+  Penggunaan `await` dalam JavaScript saat menggunakan `fetch()` berfungsi untuk menunda eksekusi kode hingga proses pengambilan data dari server selesai. Dengan menggunakan `await`, kita memastikan bahwa program menunggu hasil dari `fetch()` sebelum melanjutkan ke baris kode berikutnya. Ini memungkinkan kita untuk langsung bekerja dengan data yang diterima tanpa perlu menggunakan callback atau chaining `.then()`, sehingga kode menjadi lebih sederhana dan mudah dipahami.
+
+  Jika `await` tidak digunakan, `fetch()` akan segera mengembalikan sebuah `Promise` dan kode berikutnya akan dieksekusi tanpa menunggu hasilnya. Akibatnya, kita tidak dapat langsung mengakses data dari respons karena program belum menyelesaikan proses pengambilan data dari server. Tanpa `await`, kita harus menggunakan metode seperti `.then()` untuk menangani respons setelah `Promise` selesai, yang bisa membuat kode menjadi lebih rumit dan kurang intuitif.
+
+
+*Mengapa kita perlu menggunakan decorator csrf_exempt pada view yang akan digunakan untuk AJAX POST?*
+->
+  Decorator `csrf_exempt` digunakan pada view yang menerima AJAX POST untuk menonaktifkan pengecekan token CSRF oleh Django. Ini diperlukan karena secara default, Django memerlukan token CSRF pada setiap permintaan POST untuk mencegah serangan CSRF. AJAX POST, terutama yang dibuat dengan JavaScript murni atau dari sumber eksternal, mungkin tidak mengirimkan token ini dengan benar. Dengan menggunakan `csrf_exempt`, kita memastikan bahwa permintaan AJAX dapat diproses tanpa gagal, tetapi harus digunakan dengan hati-hati untuk menghindari risiko keamanan.
+
+*Pada tutorial PBP minggu ini,embersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?*
+->
+  Pembersihan data input pengguna tetap harus dilakukan di backend karena keamanan dan keandalannya tidak bisa dijamin jika hanya dilakukan di frontend. Validasi dan sanitasi di frontend bisa dilewati atau dimodifikasi oleh pengguna yang berbahaya menggunakan alat seperti browser developer tools atau skrip khusus. Dengan melakukan pembersihan data di backend, kita memastikan bahwa data yang diterima aplikasi benar-benar aman dan valid, terlepas dari bagaimana data tersebut dikirim, sehingga mengurangi risiko serangan seperti SQL Injection, XSS, dan bentuk-bentuk manipulasi data lainnya.
+
+
+*Implementasi Checklist*
+->
+  -AJAX GET
+    Pertama-tama saya menghapus kode `product_entry = Product.objects.filter(user=request.user)` dan `product_entry = product_entry` pada show_main di views.py. Setelah itu pada main.html saya menghapus block conditional yang menampilkan isi dari product_entry dan menggantinya dengan '`<div id="product_entry_cards"></div>`
+
+    Lalu saya menambahkan block <script> yang berisi sebuah async function yang melakukan fetch API ke data json dengan kode return fetch("{% url 'main:show_json' %}").then((res) => res.json()) lalu di parse menjadi objek JavaScript. Lalu saya juga membuat suatu asyncfunction yang berguna untuk mengecek apakah product_entry memiliki isi atau tidak jika ada maka akan menampilkan card-card yang berisi product-product tersebut menggunakan `document.getElementById("product_entry_cards").className = classNameString;
+    document.getElementById("product_entry_cards").innerHTML = htmlString` sesuai dengan id yang sudah saya buat sebelumnya.
+
+  -AJAX POST
+    Pertama-tama saya membuat tombol pada halaman utama yang memicu modal untuk menambahkan product baru. Tombol ini didefinisikan sebagai berikut:
+    `<button data-modal-target="crudModal" data-modal-toggle="crudModal" class="btn bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="showModal();">`
+      `Add New Product by AJAX`
+    `</button>`
+
+    Ketika tombol ditekan, fungsi showModal() dipanggil untuk menampilkan modal. Fungsi ini mengubah kelas elemen modal sehingga modal menjadi terlihat. Modal berisi form yang dirancang untuk menerima input product dari pengguna. Setelah pengguna mengisi form, tombol submit digunakan untuk mengirimkan data tersebut.
+
+    Tahapan kedua adalah pembuatan view baru di backend untuk menangani data dari form yang dikirim menggunakan AJAX. View ini terhubung dengan URL yang didefinisikan sebagai /create-ajax/ yaitu function pada views.py sebagai berikut:
+
+    @csrf_exempt
+    @require_POST
+    def add_product_entry_ajax(request):
+    
+      name = strip_tags(request.POST.get("name"))
+      price = request.POST.get("price")
+      description = strip_tags(request.POST.get("description"))
+      user = request.user
+
+      new_product = Product(
+          name=name, price=price,
+          description=description,
+          user=user
+      )
+      new_product.save()
+
+      return HttpResponse(b"CREATED", status=201)
+    
+    Permintaan AJAX dilakukan menggunakan fungsi fetch() sebagai berikut:   
+
+        fetch("{% url 'main:add_product_entry_ajax' %}", {
+      method: "POST",
+      body: new FormData(document.querySelector('#ProductForm')),
+    })
+    .then(response => refreshProductEntries())
+
+    Fungsi ini mengirim data dari form ke view backend secara asinkronus tanpa me-refresh halaman. Jika pengiriman data berhasil, fungsi refreshProductEntries() akan dipanggil untuk memperbarui daftar mood.
+
+    Tahapan terakhir melibatkan pembaruan daftar mood secara asinkronus di halaman utama setelah data mood baru berhasil ditambahkan. Fungsi refreshProductEntries() digunakan untuk mengambil daftar mood terbaru dari server menggunakan AJAX dan memperbarui elemen DOM tanpa memuat ulang seluruh halaman. Ini dilakukan dengan mengosongkan elemen HTML yang menampung card product dan menambahkan card baru berdasarkan data yang diperoleh dari server.
+
+
+</details>
+
 

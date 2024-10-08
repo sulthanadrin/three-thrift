@@ -10,20 +10,26 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.utils.html import strip_tags
+
 
 
 # Create your views here.
 @login_required(login_url='/login')
 def show_main(request):
-    product_entry = Product.objects.filter(user=request.user)
+    # product_entry = Product.objects.filter(user=request.user)
 
     context = {
         'app_name' : '3Thrift',
         'npm'   : '2306201306',
         'name': request.user.username,
         'class': 'PBP C',
-        'product_entry': product_entry,
-        'last_login': request.COOKIES['last_login'],
+        # 'product_entry': product_entry,
+        # 'last_login': request.COOKIES['last_login'],
+        'last_login': request.COOKIES.get('last_login', 'Not logged in recently'),
+
     }
 
     return render(request, "main.html", context)
@@ -41,16 +47,39 @@ def register(request):
     context = {'form':form}
     return render(request, 'register.html', context)
 
+@csrf_exempt
+@require_POST
+def add_product_entry_ajax(request):
+    
+    name = strip_tags(request.POST.get("name"))
+    price = request.POST.get("price")
+    description = strip_tags(request.POST.get("description"))
+    user = request.user
+
+    new_product = Product(
+        name=name, price=price,
+        description=description,
+        user=user
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
+
 def login_user(request):
    if request.method == 'POST':
       form = AuthenticationForm(data=request.POST)
 
       if form.is_valid():
+            # user = form.get_user()
+            # login(request, user)
+            # response = HttpResponseRedirect(reverse("main:show_main"))
+            # response.set_cookie('last_login', str(datetime.datetime.now()))
+            # messages.success(request, "Login berhasil!")
+            # return response
             user = form.get_user()
             login(request, user)
             response = HttpResponseRedirect(reverse("main:show_main"))
             response.set_cookie('last_login', str(datetime.datetime.now()))
-            messages.success(request, "Login berhasil!")
             return response
 
       messages.error(request, "Username atau password salah.")
@@ -103,11 +132,13 @@ def delete_product(request, id):
 
 
 def show_xml(request):
-    data = Product.objects.all()
+    # data = Product.objects.all()
+    data = Product.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 def show_json(request):
-    data = Product.objects.all()
+    # data = Product.objects.all()
+    data = Product.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 def show_xml_by_id(request, id):
