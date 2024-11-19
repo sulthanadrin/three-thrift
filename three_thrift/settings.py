@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-h9r32&j(0yc#a5g-@4n1qr=togzk&hguvsix=v^f^md&7g3h#(
 PRODUCTION = os.getenv("PRODUCTION", False)
 DEBUG = not PRODUCTION
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1","sultan-adrin-threethrift.pbp.cs.ui.ac.id"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1","sultan-adrin-threethrift.pbp.cs.ui.ac.id","10.0.2.2"]
 
 
 # Application definition
@@ -39,11 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main'
+    'main',
+    'authentication',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -74,6 +77,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'three_thrift.wsgi.application'
 
 
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 

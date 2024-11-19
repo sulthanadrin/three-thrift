@@ -1,7 +1,8 @@
+import json
 from django.shortcuts import render, redirect, reverse
 from main.forms import ProductForm
 from main.models import Product
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.contrib import messages
@@ -148,5 +149,24 @@ def show_xml_by_id(request, id):
 def show_json_by_id(request, id):
     data = Product.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+
+# @csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+        new_product = Product.objects.create(
+            user=request.user,
+            name=data["name"],
+            price=int(data["price"]),
+            description=data["description"]
+        )
+
+        new_product.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
 
 
